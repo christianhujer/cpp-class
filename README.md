@@ -2,20 +2,20 @@
 
 ## Participants
 
+- Abhijit Patil
 - Christian Hujer (teacher)
 - Digvijay Shinde
-- Namrata Baruva
-- Suraj Kedari
-- Ritik Gadage
-- Vishnu Gaddime
+- Kshitij Jadhav
 - Monika Shaw
-- Abhijit Patil
+- Namrata Baruva
 - Nikita Jain
 - Prasad Pawar
-- Wasim Khan
-- Sonali Gaonkar
 - Pratik Padman
-- Sakshi Thorat
-- Kshitij Jadhav
+- Ritik Gadage
 - Sachin Bidwai
+- Sakshi Thorat
+- Sonali Gaonkar
+- Suraj Kedari
+- Vishnu Gaddime
+- Wasim Khan
 - Wasim Shaikh
