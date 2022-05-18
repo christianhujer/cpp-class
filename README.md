@@ -9,3 +9,4 @@
 - Vishnu Gaddime
 - Monika Shaw
 - Abhijit Patil
+- Nikita Jain
