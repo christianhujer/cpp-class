@@ -6,4 +6,4 @@
 - Namrata Baruva
 - Suraj Kedari
 - Ritik Gadage
--Vishnu Gaddime
+- Vishnu Gaddime
