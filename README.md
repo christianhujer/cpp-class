@@ -1,6 +1,7 @@
 # C++ Learning Class
 
 ## Participants
+
 - Christian Hujer (teacher)
 - Digvijay Shinde
 - Namrata Baruva
@@ -9,4 +10,9 @@
 - Vishnu Gaddime
 - Monika Shaw
 - Abhijit Patil
+- Nikita Jain
+- Prasad Pawar
+- Wasim Khan
+- Sonali Gaonkar
+- Pratik Padman
 - Sakshi Thorat
