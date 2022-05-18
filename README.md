@@ -15,3 +15,5 @@
 - Wasim Khan
 - Sonali Gaonkar
 - Pratik Padman
+- Kshitij Jadhav
+
