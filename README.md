@@ -3,3 +3,4 @@
 ## Participants
 - Christian Hujer (teacher)
 - Digvijay Shinde
+- Namrata Baruva
