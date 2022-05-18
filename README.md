@@ -17,3 +17,4 @@
 - Pratik Padman
 - Sakshi Thorat
 - Kshitij Jadhav
+- Sachin Bidwai
