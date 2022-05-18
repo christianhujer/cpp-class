@@ -6,3 +6,4 @@
 - Namrata Baruva
 - Suraj Kedari
 - Ritik Gadage
+- Wasim Khan
