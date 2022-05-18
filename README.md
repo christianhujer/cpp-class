@@ -12,4 +12,5 @@
 - Abhijit Patil
 - Nikita Jain
 - Prasad Pawar
+- Wasim Khan
 - Sonali Gaonkar
