@@ -5,3 +5,4 @@
 - Digvijay Shinde
 - Namrata Baruva
 - Suraj Kedari
+- Ritik Gadage
