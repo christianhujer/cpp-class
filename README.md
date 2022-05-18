@@ -5,6 +5,7 @@
 - Abhijit Patil
 - Christian Hujer (teacher)
 - Digvijay Shinde
+- Krithika Chandrasekhar (assistant teacher)
 - Kshitij Jadhav
 - Monika Shaw
 - Namrata Baruva
