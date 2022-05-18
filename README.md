@@ -18,3 +18,4 @@
 - Sakshi Thorat
 - Kshitij Jadhav
 - Sachin Bidwai
+- Wasim Shaikh
