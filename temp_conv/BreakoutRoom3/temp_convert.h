@@ -5,8 +5,8 @@ using namespace std;
 class TemperatureConvertor
 {
 public:
-    virtual double fromKelvin(double kelvin);
-    virtual double toKelvin(double other);
+    virtual double fromKelvin(double kelvin) = 0;
+    virtual double toKelvin(double other) = 0;
 };
 
 class CelsiusConvertor : public TemperatureConvertor
