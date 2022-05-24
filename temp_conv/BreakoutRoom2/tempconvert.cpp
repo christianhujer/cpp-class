@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 
     CelsiusConverter celsius;
 
-    assert(celsius.fromKelvin(0) == -274.15);
+    assert(celsius.fromKelvin(0) == -273.15);
 
     return EXIT_SUCCESS;
 
