@@ -62,10 +62,12 @@ double KelvinConvertor :: toKelvin(double kelvin)
 {
     return kelvin;
 }
+
+CelsiusConvertor celsius;
+KelvinConvertor kelvin;
+FahrenheitConvertor fahrenheit;
+
 TemperatureConvertor* getScale(string inputScale){
-    CelsiusConvertor celsius;
-    KelvinConvertor kelvin;
-    FahrenheitConvertor fahrenheit;
     TemperatureConvertor *temp;
 
     if (celsius.isScale(inputScale)) {
@@ -82,7 +84,7 @@ TemperatureConvertor* getScale(string inputScale){
 
     else {
         cerr << "error:Unsupported temprature scale." << inputScale << endl;
-        abort();
+        exit(EXIT_FAILURE);
     }
     return temp;
 }
@@ -97,15 +99,17 @@ int main(int argc, char* argv[])
     if (argc < 3) {
         cerr << argv[0] << ": error: Not enough arguments.\n"
         "Usage: temp_convert INPUT_SCALE OUTPUT_SCALE [TEMPERATURE]...";
+        return EXIT_FAILURE;
     }
     TemperatureConvertor *inputScale, *outputScale;
     CelsiusConvertor celsius;
     inputScale = getScale(argv[1]);
     outputScale = getScale(argv[2]);
     for (int i = 3; i < argc; i++) {
-    int inputTemperature = atof(argv[i]);
-    int tempInKelvin = inputScale->toKelvin(inputTemperature);
-    int outputTemperature =outputScale->fromKelvin(tempInKelvin);
+    float inputTemperature = atof(argv[i]);
+    cout << inputTemperature;
+    float temperatureInKelvin = inputScale->toKelvin(inputTemperature);
+    int outputTemperature =outputScale->fromKelvin(temperatureInKelvin);
     cout << outputTemperature << endl;
     }
     return EXIT_SUCCESS;
