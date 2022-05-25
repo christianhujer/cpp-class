@@ -1,5 +1,7 @@
 #include<iostream>
 #include<cassert>
+#include <list>
+#include <iterator>
 #include <string.h> 
 
 using namespace std;
@@ -86,7 +88,7 @@ bool kelvinIsScale(const char* str) {
     return isInList(str, kelvinStrings);
 }
 
-converter_t getToKelvinFunction(char* temperatureScale) {
+/*converter_t getToKelvinFunction(char* temperatureScale) {
     struct TemperatureScale temperatureScales[] = {
         celsius, fahrenheit, kelvin, rankine, delisle, newton
     };
@@ -97,17 +99,46 @@ converter_t getToKelvinFunction(char* temperatureScale) {
     }
     fprintf(stderr, "error: Unsupported temperature scale: %s\n", temperatureScale);
     exit(EXIT_FAILURE);
-}
+}*/
 
+
+
+/*void printReport(list <Converter> converters )
+{
+    for (list<Converter>::iterator converter = converters.begin(); converter != converters.end(); ++converter) {
+        if (converter->celsius == BREAKFAST || expense->type == DINNER) {
+            mealExpenses += expense->amount;
+        }
+}*/
+
+enum Convert
+{
+    celsius,
+    fahrenheit,
+    kelvin
+
+};
 int main(int argc, char* argv[]) {
     if (argc <= 3)
     {
         cout << argv[0] << "error: Not enough arguments.\nUsage:" << argv[0] << "INPUT_SCALE OUTPUT_SCALE [TEMPERATURE]..." << endl;
     }
+
+
+
     TemperatureConverter* Temp;
     CelsiusConverter celsius;
     FahrenheitConverter fahrenheit;
     KelvinConverter kelvin;
+
+    std::list<TemperatureConverter*> Tlist = {&celsius, &fahrenheit, &kelvin} ;
+
+
+    for (list<TemperatureConverter*>::iterator itr = Tlist.begin(); itr != Tlist.end(); ++itr) {
+         if (itr-> ) {
+            mealExpenses += expense->amount;
+        }
+
     if (celsiusIsScale(argv[1]))
     {
          Temp = &celsius;
