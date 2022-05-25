@@ -11,12 +11,17 @@ bool TemperatureConverter ::isInTempStrings(string inputScale, list<string> outp
     list<string>::iterator it;
     for (it = outputScale.begin(); it != outputScale.end(); it++)
     {
-        if ((*it).compare(inputScale));
+        if (inputScale.compare((*it)) == 0); // 1.need to check documentation (cleared)
         {
             return true;
         }
     }
     return false;
+}
+
+double TemperatureConverter ::getToKelvin(string temperatureScale) //  rgv[1] = celsius
+{
+   // return isSupportingScale(temperatureScale); // celcius 
 }
 
 double CelsiusConverter ::fromKelvin(double Kelvin)
@@ -28,7 +33,7 @@ double CelsiusConverter ::toKelvin(double Other)
     return Other + 273.15;
 }
 
-bool CelsiusConverter ::isCelsius(string inputScale)
+bool CelsiusConverter ::isSupportingScale(string inputScale)
 {
     list<string> celsiusstrings = {"°C", "c", "C", "celsius", "Celsius"};
     return isInTempStrings(inputScale, celsiusstrings);
@@ -43,7 +48,7 @@ double FahrenheitConverter ::toKelvin(double Other)
     return (Other + 459.67) * 5 / 9;
 }
 
-bool FahrenheitConverter ::isFarhenheit(string inputScale)
+bool FahrenheitConverter ::isSupportingScale(string inputScale)   // need to change function name make a virtual function
 {
     list<string> fahrenheitStrings = {"F", "°F", "f", "Fahrenheit", "fahrenheit"};
     return isInTempStrings(inputScale, fahrenheitStrings);
@@ -58,7 +63,7 @@ double KelvinConverter ::toKelvin(double Other)
     return Other;
 }
 
-bool KelvinConverter ::isKelvin(string inputScale)
+bool KelvinConverter ::isSupportingScale(string inputScale)
 {
     list<string> kelvinStrings = {"k", "K", "kelvin", "Kelvin"};
     return isInTempStrings(inputScale, kelvinStrings);
@@ -74,12 +79,14 @@ int main(int argc, char *argv[])
 
     TemperatureConverter *temp;
     CelsiusConverter cels;
-    temp = &cels;
-    if (cels.isCelsius(argv[1]) == true)
-    {
-        cout << temp->fromKelvin(atof(argv[3])) << endl;
-    }
-
+    FahrenheitConverter temp1;
     assert(temp->fromKelvin(0) == -273.15);
+    if (temp->getToKelvin((string)argv[1]) == true)
+    {
+        for (int i = 3; i < argc; i++)  // C C 0 10 30
+        {
+            cout << temp->fromKelvin(atof(argv[i])) << endl;
+        }
+    }
     return EXIT_SUCCESS;
 }
