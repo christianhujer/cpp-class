@@ -5,13 +5,17 @@ using namespace std;
 class TemperatureConvertor
 {
 public:
+    virtual bool isScale(string inputScale) = 0;
     virtual double fromKelvin(double kelvin) = 0;
     virtual double toKelvin(double other) = 0;
+    //TemperatureConvertor getToScale(string scale);
+    //TemperatureConvertor fromToScale(string scale);
 };
 
 class CelsiusConvertor : public TemperatureConvertor
 {
 public:
+    bool isScale(string scale);
     double fromKelvin(double kelvin);
     double toKelvin(double celsius);
 };
@@ -19,6 +23,7 @@ public:
 class FahrenheitConvertor : public TemperatureConvertor
 {
 public:
+    bool isScale(string scale);
     double fromKelvin(double kelvin);
     double toKelvin(double other);
 };
@@ -26,6 +31,7 @@ public:
 class KelvinConvertor : public TemperatureConvertor
 {
 public:
+    bool isScale(string scale);
     double fromKelvin(double kelvin);
     double toKelvin(double other);
 };
