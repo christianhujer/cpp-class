@@ -8,8 +8,7 @@ public:
     virtual bool isScale(string inputScale) = 0;
     virtual double fromKelvin(double kelvin) = 0;
     virtual double toKelvin(double other) = 0;
-    //TemperatureConvertor getToScale(string scale);
-    //TemperatureConvertor fromToScale(string scale);
+    //TemperatureConvertor *getScale(string scale);
 };
 
 class CelsiusConvertor : public TemperatureConvertor
