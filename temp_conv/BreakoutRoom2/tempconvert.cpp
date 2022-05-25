@@ -1,65 +1,85 @@
+#include <assert.h>
 #include <iostream>
-#include <cassert>
+#include <list>
+#include <string>
+#include "tempconvert.h"
 
 using namespace std;
 
-class TemperatureConverter
+bool TemperatureConverter ::isInTempStrings(string inputScale, list<string> outputScale)
 {
-    public:
-    virtual double fromKelvin(double Kelvin) = 0;
-    virtual double toKelvin(double Other) = 0;
-};
+    list<string>::iterator it;
+    for (it = outputScale.begin(); it != outputScale.end(); it++)
+    {
+        if ((*it).compare(inputScale));
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
-class CelsiusConverter : public TemperatureConverter
+double CelsiusConverter ::fromKelvin(double Kelvin)
 {
-    public:
-    double fromKelvin(double Kelvin)
-    {
-        return Kelvin - 273.15;
-    }
-    double toKelvin(double Other)
-    {
-        return Other + 273.15;
-    }
-};
-
-class FahrenheitConverter : public TemperatureConverter
+    return Kelvin - 273.15;
+}
+double CelsiusConverter ::toKelvin(double Other)
 {
-    double fromKelvin(double Kelvin)
-    {
-        return Kelvin * 9/5 - 459.67;
-    }
-    double toKelvin(double Other)
-    {
-        return (Other + 459.67) * 5/9;
-    }
-};
+    return Other + 273.15;
+}
 
-class KelvinConverter : public TemperatureConverter
+bool CelsiusConverter ::isCelsius(string inputScale)
 {
-    double fromKelvin(double Kelvin)
-    {
-        return Kelvin;
-    }
-    double toKelvin(double Other)
-    {
-        return Other;
-    }
-};
+    list<string> celsiusstrings = {"°C", "c", "C", "celsius", "Celsius"};
+    return isInTempStrings(inputScale, celsiusstrings);
+}
 
+double FahrenheitConverter ::fromKelvin(double Kelvin)
+{
+    return Kelvin * 9 / 5 - 459.67;
+}
+double FahrenheitConverter ::toKelvin(double Other)
+{
+    return (Other + 459.67) * 5 / 9;
+}
+
+bool FahrenheitConverter ::isFarhenheit(string inputScale)
+{
+    list<string> fahrenheitStrings = {"F", "°F", "f", "Fahrenheit", "fahrenheit"};
+    return isInTempStrings(inputScale, fahrenheitStrings);
+}
+
+double KelvinConverter ::fromKelvin(double Kelvin)
+{
+    return Kelvin;
+}
+double KelvinConverter ::toKelvin(double Other)
+{
+    return Other;
+}
+
+bool KelvinConverter ::isKelvin(string inputScale)
+{
+    list<string> kelvinStrings = {"k", "K", "kelvin", "Kelvin"};
+    return isInTempStrings(inputScale, kelvinStrings);
+}
 
 int main(int argc, char *argv[])
 {
-   /* if (argc <= 3)
+    if (argc < 3)
     {
-        cout<< argv[0] << "error: Not enough arguments.\nUsage:"<< argv[0] <<"INPUT_SCALE OUTPUT_SCALE [TEMPERATURE]..." << endl;
+        cout << argv[0] << "error: Not enough arguments.\nUsage:" << argv[0] << "INPUT_SCALE OUTPUT_SCALE [TEMPERATURE]..." << endl;
         return EXIT_FAILURE;
-    } */
+    }
 
-    CelsiusConverter celsius;
+    TemperatureConverter *temp;
+    CelsiusConverter cels;
+    temp = &cels;
+    if (cels.isCelsius(argv[1]) == true)
+    {
+        cout << temp->fromKelvin(atof(argv[3])) << endl;
+    }
 
-    assert(celsius.fromKelvin(0) == -273.15);
-
+    assert(temp->fromKelvin(0) == -273.15);
     return EXIT_SUCCESS;
-
 }
