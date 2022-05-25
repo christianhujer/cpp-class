@@ -11,6 +11,9 @@ class TemperatureConverter
    public :
        virtual double fromKelvin(double kelvin) = 0;
        virtual double toKelvin(double other) = 0;
+       bool celsiusIsScale(const char* str);
+       bool fahrenheitIsScale(const char* str);
+       bool kelvinIsScale(const char* str);
 };
 
 class CelsiusConverter : public TemperatureConverter {
@@ -73,17 +76,17 @@ bool isInList(const char* str, const char* strings[]) {
     return false;
 }
 
-bool celsiusIsScale(const char* str) {
+bool TemperatureConverter:: celsiusIsScale(const char* str) {
     const char* celsiusStrings[] = { "C", "°C", "c", "Celsius", "celsius", NULL };
     return isInList(str, celsiusStrings);
 }
 
-bool fahrenheitIsScale(const char* str) {
+bool TemperatureConverter:: fahrenheitIsScale(const char* str) {
     const char* fahrenheitStrings[] = { "F", "°F", "f", "Fahrenheit", "fahrenheit", NULL };
     return isInList(str, fahrenheitStrings);
 }
 
-bool kelvinIsScale(const char* str) {
+bool TemperatureConverter:: kelvinIsScale(const char* str) {
     const char* kelvinStrings[] = { "K", "k", "Kelvin", "kelvin", NULL };
     return isInList(str, kelvinStrings);
 }
@@ -135,8 +138,8 @@ int main(int argc, char* argv[]) {
 
 
     for (list<TemperatureConverter*>::iterator itr = Tlist.begin(); itr != Tlist.end(); ++itr) {
-         if (itr-> ) {
-            mealExpenses += expense->amount;
+         if ((*itr)->celsiusIsScale(argv[1]) || (*itr)->) {
+
         }
 
     if (celsiusIsScale(argv[1]))
