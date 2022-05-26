@@ -19,8 +19,9 @@ bool isInScale(string inputScale, list<string> scaleList) {
 
 bool CelsiusConvertor :: isScale(string inputScale) {
     list <string> celsiusScales {"c", "C", "°C", "celsius", "Celsius"};
-    return isInScale(inputScale,celsiusScales); 
+    return isInScale(inputScale, celsiusScales); 
 }
+
 double CelsiusConvertor :: fromKelvin(double kelvin) {
     return kelvin - 273.15;
 }
@@ -58,13 +59,11 @@ double KelvinConvertor :: toKelvin(double kelvin) {
 }
 
 
-CelsiusConvertor celsius;
-KelvinConvertor kelvin;
-FahrenheitConvertor fahrenheit;
+CelsiusConvertor celsius; KelvinConvertor kelvin; FahrenheitConvertor fahrenheit;
 list <TemperatureConvertor*> scales {&celsius, &kelvin, &fahrenheit};
-list <TemperatureConvertor*> :: iterator scale;
 
 TemperatureConvertor* getScale(string inputScale) {
+    list <TemperatureConvertor*> :: iterator scale;
     for (scale = scales.begin(); scale != scales.end(); scale++) {
         if ((*scale) -> isScale(inputScale))
             return *scale;
@@ -101,15 +100,18 @@ int main(int argc, char* argv[]) {
         "Usage: temp_convert INPUT_SCALE OUTPUT_SCALE [TEMPERATURE]...";
         return EXIT_FAILURE;
     }
+    
     TemperatureConvertor *inputScale, *outputScale;
-    CelsiusConvertor celsius;
+
     inputScale = getScale(argv[1]);
     outputScale = getScale(argv[2]);
+
     for (int i = 3; i < argc; i++) {
-    double inputTemperature = atof(argv[i]);
-    double temperatureInKelvin = inputScale -> toKelvin(inputTemperature);
-    double outputTemperature = outputScale -> fromKelvin(temperatureInKelvin);
-    cout << outputTemperature << endl;
+        double inputTemperature = atof(argv[i]);
+        double temperatureInKelvin = inputScale -> toKelvin(inputTemperature);
+        double outputTemperature = outputScale -> fromKelvin(temperatureInKelvin);
+        cout << outputTemperature << endl;
     }
+
     return EXIT_SUCCESS;
 }
