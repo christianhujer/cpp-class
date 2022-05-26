@@ -11,10 +11,15 @@ class TemperatureConverter
    public :
        virtual double fromKelvin(double kelvin) = 0;
        virtual double toKelvin(double other) = 0;
-       bool celsiusIsScale(const char* str);
-       bool fahrenheitIsScale(const char* str);
-       bool kelvinIsScale(const char* str);
+       virtual bool isScale(string str) =0;
 };
+
+bool isInList(string str, const string strings[])  {
+    for (; *strings != string(""); strings++)
+        if (str == *strings)
+            return true;
+    return false;
+}
 
 class CelsiusConverter : public TemperatureConverter {
 public:
@@ -26,19 +31,28 @@ public:
     {
         return other + 273.15;
     }
+    bool isScale(string str)  {
+        const string celsiusStrings[] = { "C", "°C", "c", "Celsius", "celsius", "" };
+        return isInList(str, celsiusStrings);
+    }
 };
 
 class FahrenheitConverter : public TemperatureConverter {
 public:
-    double fromKelvin(double kelvin)
-    {
+    double fromKelvin(double kelvin) {
         return kelvin * 9 / 5 - 459.67;
     }
-    double toKelvin(double other)
-    {
+
+    double toKelvin(double other) {
         return (other + 459.67) * 5 / 9;
     }
+
+    bool isScale(string str) {
+        const string fahrenheitStrings[] = { "F", "°F", "f", "Fahrenheit", "fahrenheit", "" };
+        return isInList(str, fahrenheitStrings);
+    }
 };
+
 
 class KelvinConverter : public TemperatureConverter {
 public:
@@ -50,7 +64,13 @@ public:
     {
         return other;
     }
+    bool isScale(string str) {
+        const string kelvinStrings[] = { "K", "k", "Kelvin", "kelvin", "" };
+        return isInList(str, kelvinStrings);
+    }
+
 };
+
 
 void runtest(void)
 {
@@ -69,27 +89,11 @@ void runtest(void)
     assert(Temp->toKelvin(0) == 0);
 }
 
-bool isInList(const char* str, const char* strings[]) {
-    for (; *strings != NULL; strings++)
-        if (strcmp(str, *strings) == 0)
-            return true;
-    return false;
-}
 
-bool TemperatureConverter:: celsiusIsScale(const char* str) {
-    const char* celsiusStrings[] = { "C", "°C", "c", "Celsius", "celsius", NULL };
-    return isInList(str, celsiusStrings);
-}
 
-bool TemperatureConverter:: fahrenheitIsScale(const char* str) {
-    const char* fahrenheitStrings[] = { "F", "°F", "f", "Fahrenheit", "fahrenheit", NULL };
-    return isInList(str, fahrenheitStrings);
-}
 
-bool TemperatureConverter:: kelvinIsScale(const char* str) {
-    const char* kelvinStrings[] = { "K", "k", "Kelvin", "kelvin", NULL };
-    return isInList(str, kelvinStrings);
-}
+
+
 
 /*converter_t getToKelvinFunction(char* temperatureScale) {
     struct TemperatureScale temperatureScales[] = {
@@ -138,7 +142,7 @@ int main(int argc, char* argv[]) {
 
 
     for (list<TemperatureConverter*>::iterator itr = Tlist.begin(); itr != Tlist.end(); ++itr) {
-         if ((*itr)->celsiusIsScale(argv[1]) || (*itr)->) {
+         if ((*itr)->celsiusIsScale(argv[1]) || (*itr)->fahrenheitIsScale(argv[1]) || (*itr)->kelvinIsScale(argv[1]) ) {
 
         }
 
