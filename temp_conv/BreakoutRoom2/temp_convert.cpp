@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
 
     temp1 = getToKelvin(argv[1]);
     temp2 = getToKelvin(argv[2]);
-    for (int i = 3; i <= argc; i++)
+    for (int i = 3; i < argc; i++)
     {
         double inputTemperature = atof(argv[i]);
         double temperature = temp1->toKelvin(inputTemperature);
