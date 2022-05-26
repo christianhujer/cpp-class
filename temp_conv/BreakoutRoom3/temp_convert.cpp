@@ -8,7 +8,7 @@
 
 using namespace std;
 
-bool isInScale(string inputScale,list<string> scaleList) {
+bool isInScale(string inputScale, list<string> scaleList) {
     for (list<string>:: iterator scale = scaleList.begin(); scale != scaleList.end(); scale++) {
         if(inputScale == *scale)
             return true;
@@ -32,7 +32,7 @@ double CelsiusConvertor :: toKelvin(double celsius) {
 
 bool FahrenheitConvertor :: isScale(string inputScale) {
     list <string> celsiusScales {"f", "F", "°F", "fahrenheit", "Fahrenheit"};
-    return isInScale(inputScale,celsiusScales); 
+    return isInScale(inputScale, celsiusScales); 
 }
 
 double FahrenheitConvertor :: fromKelvin(double kelvin) {
@@ -45,8 +45,8 @@ double FahrenheitConvertor :: toKelvin(double fahrenheit) {
 
 
 bool KelvinConvertor :: isScale(string inputScale) {
-    list <string> celsiusScales {"k","K", "kelvin", "Kelvin"};
-    return isInScale(inputScale,celsiusScales); 
+    list <string> celsiusScales {"k", "K", "kelvin", "Kelvin"};
+    return isInScale(inputScale, celsiusScales); 
 }
 
 double KelvinConvertor :: fromKelvin(double kelvin) {
@@ -57,10 +57,10 @@ double KelvinConvertor :: toKelvin(double kelvin) {
     return kelvin;
 }
 
+
 CelsiusConvertor celsius;
 KelvinConvertor kelvin;
 FahrenheitConvertor fahrenheit;
-
 list <TemperatureConvertor*> scales {&celsius, &kelvin, &fahrenheit};
 list <TemperatureConvertor*> :: iterator scale;
 
@@ -107,8 +107,8 @@ int main(int argc, char* argv[]) {
     outputScale = getScale(argv[2]);
     for (int i = 3; i < argc; i++) {
     double inputTemperature = atof(argv[i]);
-    double temperatureInKelvin = inputScale->toKelvin(inputTemperature);
-    double outputTemperature =outputScale->fromKelvin(temperatureInKelvin);
+    double temperatureInKelvin = inputScale -> toKelvin(inputTemperature);
+    double outputTemperature = outputScale -> fromKelvin(temperatureInKelvin);
     cout << outputTemperature << endl;
     }
     return EXIT_SUCCESS;
