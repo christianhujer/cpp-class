@@ -13,7 +13,6 @@ string concatenateArguments(int argc, char *argv[])
             ss << " ";
         ss << argv[i];
     }
-    ss << endl;
     return ss.str();
 }
 
