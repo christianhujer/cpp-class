@@ -30,19 +30,10 @@ int main(int argc, char *argv[])
         }
         else
         {
-            // getline(infile, a);
-
-            streambuf *psbuf, *backup;
-
-            backup = cout.rdbuf();
-
-            psbuf = infile.rdbuf();
-            cout.rdbuf(psbuf);
-
-            cout << cout.rdbuf(backup) << endl;
-
+            // streambuf *psbuf;
+            cout << infile.rdbuf();
             infile.close();
         }
     }
-    // return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
