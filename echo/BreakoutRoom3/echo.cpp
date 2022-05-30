@@ -9,14 +9,17 @@ string concatenateArguments(int argc, char *argv[])
     stringstream ss;
     for (int i = 1; i < argc; i++)
     {
-        ss << argv[i] << " ";
+        if (i > 1)
+            ss << " ";
+        ss << argv[i];
     }
+    ss << endl;
     return ss.str();
 }
 
 int main(int argc, char *argv[])
 {
     string concatenateResult = concatenateArguments(argc, argv);
-    cout << concatenateResult << endl;
+    cout << concatenateResult;
     return EXIT_SUCCESS;
 }
