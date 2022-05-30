@@ -4,12 +4,12 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    if (argc == 1) {
-        cout << endl;
-        return EXIT_SUCCESS;
+    stringstream buffer;
+    for (int i = 1; i < argc; i++) {
+        buffer << argv[i];
+        if (i < (argc-1))
+            buffer << " ";
     }
-    string str;
-    if (argc > 1) {
-        getline(cin,str);
-    }
+    buffer << endl;
+    cout << buffer.str();
 }
