@@ -12,4 +12,5 @@ int main(int argc, char *argv[]) {
     }
     buffer << endl;
     cout << buffer.str();
+    return EXIT_SUCCESS;
 }
