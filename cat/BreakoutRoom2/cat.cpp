@@ -5,24 +5,32 @@
 #include <fstream>
 
 using namespace std;
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[])
+{
 
-    if(argc == 1)
-        while(true){
+    if (argc == 1)
+        while (true)
+        {
             string str;
-            getline(cin,str);
-            cout<<str<<endl;
+            getline(cin, str);
+            cout << str << endl;
         }
 
-    for(int i =1; i<argc ;i++) {
+    for (int i = 1; i < argc; i++)
+    {
 
         string a;
         ifstream infile;
-        
-        infile.open(argv[1]);
-        getline(infile,a);
-        cout<<a<<endl;
 
+        infile.open(argv[i]);
+        if (!infile)
+        {
+            cerr << "cat: " << argv[i] << " : No such file or directory" << endl;
+        }
+        else
+        {
+            getline(infile, a);
+            cout << a << endl;
+        }
     }
-
 }
