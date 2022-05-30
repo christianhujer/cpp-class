@@ -17,8 +17,10 @@ public:
 bool isInList(string str, const string strings[])
 {
     for (; *strings != string(""); strings++)
-        if (str == *strings)
+        if (str == *strings){
+            cout << str << endl;
             return true;
+        }
     return false;
 }
 
@@ -94,34 +96,11 @@ void runtest(void)
     assert(Temp->fromKelvin(0) == 0);
     assert(Temp->toKelvin(0) == 0);
 }
-
-/*converter_t getToKelvinFunction(char* temperatureScale) {
-    struct TemperatureScale temperatureScales[] = {
-        celsius, fahrenheit, kelvin, rankine, delisle, newton
-    };
-    for (int i = 0; i < sizeof(temperatureScales) / sizeof(temperatureScales[0]); i++) {
-        if (temperatureScales[i].isScale(temperatureScale)) {
-            return temperatureScales[i].toKelvin;
-        }
-    }
-    fprintf(stderr, "error: Unsupported temperature scale: %s\n", temperatureScale);
-    exit(EXIT_FAILURE);
-}*/
-
-/*void printReport(list <Converter> converters )
-{
-    for (list<Converter>::iterator converter = converters.begin(); converter != converters.end(); ++converter) {
-        if (converter->celsius == BREAKFAST || expense->type == DINNER) {
-            mealExpenses += expense->amount;
-        }
-}*/
-
 enum Convert
 {
     celsius,
     fahrenheit,
     kelvin
-
 };
 int main(int argc, char *argv[])
 {
@@ -129,7 +108,6 @@ int main(int argc, char *argv[])
     {
         cout << argv[0] << "error: Not enough arguments.\nUsage:" << argv[0] << "INPUT_SCALE OUTPUT_SCALE [TEMPERATURE]..." << endl;
     }
-
     TemperatureConverter *Temp;
     TemperatureConverter *Temp1;
     CelsiusConverter celsius;
@@ -139,11 +117,12 @@ int main(int argc, char *argv[])
 
     for (list<TemperatureConverter *>::iterator itr = Tlist.begin(); itr != Tlist.end(); ++itr)
     {
+        
         if ((*itr)->isScale(argv[1]))
         {
             Temp = *itr;
         }
-        else if ((*itr)->isScale(argv[2]))
+        if ((*itr)->isScale(argv[2]))
         {
             Temp1 = *itr;
         }
@@ -153,49 +132,12 @@ int main(int argc, char *argv[])
             exit(EXIT_FAILURE);
         }
     }
-        /* if (celsiusIsScale(argv[1]))
-        {
-             Temp = &celsius;
-
-        }
-        else if (fahrenheitIsScale(argv[1]))
-        {
-            Temp = &fahrenheit;
-        }
-        else if (kelvinIsScale(argv[1]))
-        {
-            Temp = &kelvin;
-        }
-        else
-        {
-            fprintf(stderr, "error: Unsupported temperature scale: %s\n", argv[1]);
-            exit(EXIT_FAILURE);
-        }
-
-        if (celsiusIsScale(argv[2]))
-        {
-            Temp1 = &celsius;
-
-        }
-        else if (fahrenheitIsScale(argv[2]))
-        {
-            Temp1 = &fahrenheit;
-        }
-        else if (kelvinIsScale(argv[2]))
-        {
-            Temp1 = &kelvin;
-        }
-        else
-        {
-            fprintf(stderr, "error: Unsupported temperature scale: %s\n", argv[2]);
-            exit(EXIT_FAILURE);
-        } */
-        for (int i = 3; i < argc; i++)
-        {
-            double kValue = Temp->toKelvin(atof(argv[i]));
-            double output = Temp1->fromKelvin(kValue);
-            printf("%lf\n", output);
-        }
-        runtest();
-        return EXIT_SUCCESS;
+    for (int i = 3; i < argc; i++)
+    {
+        double kValue = Temp->toKelvin(atof(argv[i]));
+        double output = Temp1->fromKelvin(kValue);
+        printf("%lf\n", output);
+    }
+    runtest();
+    return EXIT_SUCCESS;
 }
