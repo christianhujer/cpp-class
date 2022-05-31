@@ -4,32 +4,38 @@
 
 using namespace std;
 
-int main(int argc, char* argv[])
+bool getContent(int argc, string &filename)
 {
-
-    if (argc == 1) {
-        while (true)
-        {
-            string str;
-            getline(cin, str);
-            cout << str << endl;
-        }
-    }
-    for (int i = 1; i < argc; i++)
+    ifstream file(filename);
+    if (file.is_open())
     {
-        ifstream istream;
-        istream.open(argv[i]);
-        if (!istream)
+        cout << file.rdbuf();
+        return true;
+    }
+    else
+    {
+        cerr << filename << " does not exist" << endl;
+        return false;
+    }
+}
+
+int main(int argc, char *argv[])
+{
+    bool endResult = EXIT_SUCCESS;
+    if (argc == 1)
+    {
+        cout << cin.rdbuf();
+    }
+    else
+    {
+        for (int i = 1; i < argc; i++)
         {
-            cerr << "Failed to open file";
-            return EXIT_FAILURE;
-        }
-        while (istream.eof() == 0)
-        {
-            string s;
-            getline(istream, s);
-            cout << s << endl;
+            string inputFileName = argv[i];
+            if (!getContent(argc, inputFileName))
+            {
+                endResult = EXIT_FAILURE;
+            }
         }
     }
-    return EXIT_SUCCESS;
+    return endResult;
 }
