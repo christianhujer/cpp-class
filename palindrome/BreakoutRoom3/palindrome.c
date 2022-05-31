@@ -7,15 +7,15 @@
 
 bool isPalindrome(char *inputArgument)
 {
-    int n = 0;
+    int firstIndex = 0;
     int length = strlen(inputArgument) - 1;
-    while(n < length)
+    while(firstIndex < length)
     {
-        while (!isalnum(inputArgument[n]) && n < length)
-            n++;
-        while (!isalnum(inputArgument[length]) && n < length)
+        while (!isalnum(inputArgument[firstIndex]) && firstIndex < length)
+            firstIndex++;
+        while (!isalnum(inputArgument[length]) && firstIndex < length)
            length--;
-        if (tolower(inputArgument[n++]) != tolower(inputArgument[length--]))
+        if (tolower(inputArgument[firstIndex++]) != tolower(inputArgument[length--]))
         {
             return false;
         } 
