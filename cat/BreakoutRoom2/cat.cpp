@@ -24,11 +24,11 @@ int main(int argc, char *argv[])
         ifstream infile;
 
         infile.open(argv[i]);
-        if (!infile)
-        {
-            cerr << "cat: " << argv[i] << " : No such file or directory" << endl;
-        }
-        else
+        // if (!infile)
+        // {
+        //     cerr << "cat: " << argv[i] << " : No such file or directory" << endl;
+        // }
+        // else
         {
             // streambuf *psbuf;
             cout << infile.rdbuf();
