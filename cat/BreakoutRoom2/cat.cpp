@@ -1,39 +1,28 @@
-//
-// Created by shawm on 30-05-2022.
-//
 #include <iostream>
 #include <fstream>
 #include <string>
 
 using namespace std;
+
 int main(int argc, char *argv[])
 {
-
+    int exitStatus = EXIT_SUCCESS;
     if (argc == 1)
-        while (true)
-        {
-            string str;
-            getline(cin, str);
-            cout << str << endl;
-        }
-
+        cout << cin.rdbuf();
     for (int i = 1; i < argc; i++)
     {
-
-        string a;
         ifstream infile;
-
         infile.open(argv[i]);
-        if (!infile)
+        if (infile.is_open())
         {
-            cerr << "cat: " << argv[i] << " : No such file or directory" << endl;
+            cout << infile.rdbuf();
         }
         else
         {
-            // streambuf *psbuf;
-            cout << infile.rdbuf();
-            infile.close();
+            cerr << "cat: " << argv[i] << " : No such file or directory" << endl;
+            exitStatus = EXIT_FAILURE;
         }
+        infile.close();
     }
-    return EXIT_SUCCESS;
+    return exitStatus;
 }
