@@ -6,34 +6,28 @@
 
 using namespace std;
 
-vector<vector<string>> sortVector(vector<vector<string>> &vectorOfLines)
+vector<string> sortVector(vector<string> &vectorOfLines)
 {
     sort(vectorOfLines.begin(), vectorOfLines.end());
     return vectorOfLines;
 }
 
-void PrintVector(vector<vector<string>> &vectorOfLine)
+void PrintVector(vector<string> &vectorOfLine)
 {
-    sortVector(vectorOfLine);
     for (int i = 0; i < vectorOfLine.size(); i++)
     {
-        for (int j = 0; j < vectorOfLine[i].size(); j++)
-        {
-            cout << vectorOfLine[i][j] << endl;
-        }
+        cout << vectorOfLine[i] << endl;
     }
 }
 
-vector<string> getFileContent(string &filename)
+void getFileContent(string &filename, vector<string> vectorOfAllLines)
 {
-    vector<string> vectorOfLines;
     ifstream myfile(filename);
     string line;
-    while(getline(myfile, line))
+    while (getline(myfile, line))
     {
-        vectorOfLines.emplace_back(line);
+        vectorOfAllLines.emplace_back(line);
     }
-    return vectorOfLines;
 }
 
 bool getStatus(int argc, string filename)
@@ -50,13 +44,13 @@ bool getStatus(int argc, string filename)
     }
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     bool endResult = EXIT_SUCCESS;
-    vector<vector<string>> vectorOfAllLines;
+    vector<string> vectorOfAllLines;
     if (argc == 1)
     {
-       // cout << cin.rdbuf() << endl;
+        // cout << cin.rdbuf() << endl;
     }
     else
     {
@@ -64,15 +58,16 @@ int main(int argc, char* argv[])
         {
             string inputFileName = argv[i];
             bool result = getStatus(argc, inputFileName);
-            if(result)
+            if (result)
             {
-                vectorOfAllLines.emplace_back(getFileContent(inputFileName));
+                getFileContent(inputFileName, vectorOfAllLines);
             }
             else
             {
                 endResult = EXIT_FAILURE;
             }
         }
+        vectorOfAllLines = sortVector(vectorOfAllLines);
         PrintVector(vectorOfAllLines);
     }
     return endResult;
