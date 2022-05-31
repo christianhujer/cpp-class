@@ -13,7 +13,7 @@ void concatenateFileContent(int argc, string filename)
     }
     else
     {
-        cerr << filename << " does not exist";
+        cerr << filename << " does not exist\n";
     }
     myfile.close();
 }
@@ -24,13 +24,10 @@ int main(int argc, char *argv[])
     {
         cout << cin.rdbuf();
     }
-    else
+    for (int i = 1; i < argc; i++)
     {
-        for (int i = 1; i < argc; i++)
-        {
-            string inputFileName = argv[i];
-            concatenateFileContent(argc, inputFileName);
-        }
+        string inputFileName = argv[i];
+        concatenateFileContent(argc, inputFileName);
     }
     return EXIT_SUCCESS;
 }

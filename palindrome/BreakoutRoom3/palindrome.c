@@ -27,25 +27,27 @@ void selfTest()
 {
     char* input = (char*)malloc(100*sizeof(char));
     strcpy(input, "");
-    assert(isPalindrome(input) == 1);
+    assert(isPalindrome(input));
     strcpy(input, "foo");
-    assert(isPalindrome(input) == 0);
+    assert(!isPalindrome(input));
     strcpy(input, "AGA");
-    assert(isPalindrome(input) == 1);
+    assert(isPalindrome(input));
     strcpy(input, "Anna");
-    assert(isPalindrome(input) == 1);
+    assert(isPalindrome(input));
     strcpy(input, "Otto");
-    assert(isPalindrome(input) == 1);
+    assert(isPalindrome(input));
     strcpy(input, "Hildegard");
-    assert(isPalindrome(input) == 0);
+    assert(!isPalindrome(input));
     strcpy(input, "Vishnu");
-    assert(isPalindrome(input) == 0);
+    assert(!isPalindrome(input));
     strcpy(input, "a#a+aa");
-    assert(isPalindrome(input) == 1);
+    assert(isPalindrome(input));
     strcpy(input, "Amok Oma");
-    assert(isPalindrome(input) == 1);
+    assert(isPalindrome(input));
     strcpy(input, "A man, a plan, a canal: Panama");
-    assert(isPalindrome(input) == 1);
+    assert(isPalindrome(input));
+    strcpy(input, "+");
+    assert(isPalindrome(input));
 }
 
 int main(int argc, char* argv[])
