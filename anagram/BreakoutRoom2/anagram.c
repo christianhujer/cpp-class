@@ -4,45 +4,30 @@
 #include <string.h>
 #include <assert.h>
 
-char *sort(char *string)
+int compare(const void *a, const void *b)
 {
-    int n = strlen(string);
-    char temp;
-
-    for (int i = 0; i < n - 1; i++)
-    {
-        for (int j = i + 1; j < n; j++)
-        {
-            if (string[i] > string[j])
-            {
-                temp = string[i];
-                string[i] = string[j];
-                string[j] = temp;
-            }
-        }
-    }
-    return string;
+    return *(const char *)a - *(const char *)b;
 }
 
 bool isAnagram(char *firstargument, char *secondargument)
 {
     
-    char orignalFirst[10];
+    char* orignalFirst = (char*)malloc(sizeof(char));
     strcpy(orignalFirst, firstargument);
-    char orignalSecond[10];
+    char* orignalSecond = (char*)malloc(sizeof(char));
     strcpy(orignalSecond, secondargument);
 
-    firstargument = sort(firstargument);
-    secondargument = sort(secondargument);
+    qsort(firstargument, strlen(firstargument), sizeof(firstargument[0]), compare);
+    qsort(secondargument, strlen(secondargument), sizeof(secondargument[0]), compare);
 
     if(strcmp(firstargument,secondargument) == 0)
     {
-        printf("%s and %s strings are an anagram of each other.\n", orignalFirst,orignalSecond);
+        printf("%s and %s strings are an anagram of each other.\n", orignalFirst, orignalSecond);
         return true;
     }
     else
     {
-        printf("%s and %s strings are not anagram of each other.\n", orignalFirst,orignalSecond);
+        printf("%s and %s strings are not anagram of each other.\n", orignalFirst, orignalSecond);
         return false;
     }
 }
