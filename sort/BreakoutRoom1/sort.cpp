@@ -6,27 +6,29 @@
 
 using namespace std;
 
+static vector<string> vectorOfLines;
+
 vector<string> sortVector(vector<string> &vectorOfLines)
 {
     sort(vectorOfLines.begin(), vectorOfLines.end());
     return vectorOfLines;
 }
 
-void PrintVector(vector<string> &vectorOfLine)
+void PrintVector(vector<string> &vectorOfLines)
 {
-    for (int i = 0; i < vectorOfLine.size(); i++)
+    for (int i = 0; i < vectorOfLines.size(); i++)
     {
-        cout << vectorOfLine[i] << endl;
+        cout << vectorOfLines[i] << endl;
     }
 }
 
-void getFileContent(string &filename, vector<string> vectorOfAllLines)
+void getFileContent(string &filename)
 {
     ifstream myfile(filename);
     string line;
     while (getline(myfile, line))
     {
-        vectorOfAllLines.emplace_back(line);
+        vectorOfLines.emplace_back(line);
     }
 }
 
@@ -47,7 +49,6 @@ bool getStatus(int argc, string filename)
 int main(int argc, char *argv[])
 {
     bool endResult = EXIT_SUCCESS;
-    vector<string> vectorOfAllLines;
     if (argc == 1)
     {
         // cout << cin.rdbuf() << endl;
@@ -60,15 +61,15 @@ int main(int argc, char *argv[])
             bool result = getStatus(argc, inputFileName);
             if (result)
             {
-                getFileContent(inputFileName, vectorOfAllLines);
+                getFileContent(inputFileName);
             }
             else
             {
                 endResult = EXIT_FAILURE;
             }
         }
-        vectorOfAllLines = sortVector(vectorOfAllLines);
-        PrintVector(vectorOfAllLines);
+        sortVector(vectorOfLines);
+        PrintVector(vectorOfLines);
     }
     return endResult;
 }
