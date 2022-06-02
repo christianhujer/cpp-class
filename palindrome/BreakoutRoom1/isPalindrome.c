@@ -35,13 +35,15 @@ char* invert(char *word) {
 }
 
 bool isPlaindrome(char *word) {
+    char orignalWord[10];
+    strcpy(orignalWord, word);
     word = removeNoise(word);
     if (strcmp(word,invert(word)) == 0) {
-        printf("%s is a palindrome\n",word);
+        printf("%s is a palindrome\n", orignalWord);
         return true;
     }
     else {
-         printf("%s is not a palindrome\n",word);
+         printf("%s is not a palindrome\n", orignalWord);
          return false;
     }
 }

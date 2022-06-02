@@ -6,12 +6,9 @@
 
 using namespace std;
 
-static vector<string> vectorOfLines;
-
-vector<string> sortVector(vector<string> &vectorOfLines)
+void sortVector(vector<string> &vectorOfLines)
 {
     sort(vectorOfLines.begin(), vectorOfLines.end());
-    return vectorOfLines;
 }
 
 void PrintVector(vector<string> &vectorOfLines)
@@ -22,17 +19,19 @@ void PrintVector(vector<string> &vectorOfLines)
     }
 }
 
-void getFileContent(string &filename)
+vector<string> getFileContent(string &filename)
 {
+    vector<string> vectorOfLine;
     ifstream myfile(filename);
     string line;
     while (getline(myfile, line))
     {
-        vectorOfLines.emplace_back(line);
+        vectorOfLine.emplace_back(line);
     }
+    return vectorOfLine;
 }
 
-bool getStatus(int argc, string filename)
+bool getStatus(string &filename)
 {
     ifstream file(filename);
     if (file.is_open())
@@ -58,18 +57,21 @@ int main(int argc, char *argv[])
         for (int i = 0; i < argc; i++)
         {
             string inputFileName = argv[i];
-            bool result = getStatus(argc, inputFileName);
-            if (result)
+            if (getStatus(inputFileName))
             {
-                getFileContent(inputFileName);
+               vector<string> tempVector = getFileContent(inputFileName);
+               for (int j = 0; j < tempVector.size(); j++)
+               {
+                   vectorOfAllLines.emplace_back(tempVector[j]);
+               }
             }
             else
             {
                 endResult = EXIT_FAILURE;
             }
         }
-        sortVector(vectorOfLines);
-        PrintVector(vectorOfLines);
+        sortVector(vectorOfAllLines);
+        PrintVector(vectorOfAllLines);
     }
     return endResult;
 }
