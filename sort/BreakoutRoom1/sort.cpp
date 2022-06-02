@@ -11,11 +11,11 @@ void sortVector(vector<string> &vectorOfLines)
     sort(vectorOfLines.begin(), vectorOfLines.end());
 }
 
-void PrintVector(vector<string> &vectorOfLine)
+void PrintVector(vector<string> &vectorOfLines)
 {
-    for (int i = 0; i < vectorOfLine.size(); i++)
+    for (int i = 0; i < vectorOfLines.size(); i++)
     {
-        cout << vectorOfLine[i] << endl;
+        cout << vectorOfLines[i] << endl;
     }
 }
 
@@ -48,7 +48,6 @@ bool getStatus(string &filename)
 int main(int argc, char *argv[])
 {
     bool endResult = EXIT_SUCCESS;
-    vector<string> vectorOfAllLines;
     if (argc == 1)
     {
         // cout << cin.rdbuf() << endl;
