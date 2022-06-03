@@ -4,9 +4,10 @@ using namespace std;
 
 int smallestMultiple()
 {
-    int check = 0;
+    
     for (int i = 20; ; i++)
     {
+        int check = 0;
         for (int j = 1; j < 21; j++)
         {
             if (i % j == 0)
@@ -19,7 +20,7 @@ int smallestMultiple()
             return i;
             break;
         }
-        check = 0;
+       // check = 0;
     }
 }
 
