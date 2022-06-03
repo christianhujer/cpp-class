@@ -6,9 +6,11 @@
 
 using namespace std;
 
-bool isInList(char word, list<char> &braces)
+vector<char> braces = {'(', ')', '{', '}', '[', ']'};
+
+bool isInList(char word)
 {
-    list<char>::iterator it;
+    vector<char>::iterator it;
     for (it = braces.begin(); it != braces.end(); it++)
     {
         if (word == *it)
@@ -17,64 +19,29 @@ bool isInList(char word, list<char> &braces)
     return false;
 }
 
-bool isParanthesisBalanced(vector<char> &bracesInFile)
+bool isBalanced(vector<char> &bracesInFile)
 {
-    int count1 = count(bracesInFile.begin(), bracesInFile.end(), '(');
-    int count2 = count(bracesInFile.begin(), bracesInFile.end(), ')');
-    if (count1 == count2)
+    bool status = true;   
+    for (int i = 0; i < 5; i += 2)
     {
-        return true;
+        int count1 = count(bracesInFile.begin(), bracesInFile.end(), braces[i]);
+        int count2 = count(bracesInFile.begin(), bracesInFile.end(), braces[i+1]);
+        if (count1 == count2)
+        {
+            status;
+        }
+        else if (count1 > count2)
+        {
+            cerr << "error: missing '" << braces[i+1] << "'" << endl;
+            status = false;
+        }
+        else
+        {
+            cerr << "error: missing '" << braces[i] << "'" << endl;
+            status = false;
+        }
     }
-    else if (count1 > count2)
-    {
-        cerr << "error: missing ')' " << endl;
-        return false;
-    }
-    else
-    {
-        cerr << "error: missing '(' " << endl;
-        return false;
-    }
-}
-
-bool isCurlysBalanced(vector<char> &bracesInFile)
-{
-    int count1 = count(bracesInFile.begin(), bracesInFile.end(), '{');
-    int count2 = count(bracesInFile.begin(), bracesInFile.end(), '}');
-    if (count1 == count2)
-    {
-        return true;
-    }
-    else if (count1 > count2)
-    {
-        cerr << "error: missing '}' " << endl;
-        return false;
-    }
-    else
-    {
-        cerr << "error: missing '{' " << endl;
-        return false;
-    }
-}
-
-bool isRectangularsBalanced(vector<char> &bracesInFile)
-{
-    int count1 = count(bracesInFile.begin(), bracesInFile.end(), '[');
-    int count2 = count(bracesInFile.begin(), bracesInFile.end(), ']');
-    if (count1 == count2)
-    {
-        return true;
-    }
-    else if (count1 > count2)
-    {
-        cerr << "error: missing ']'" << endl;
-        return false;
-    }
-    else
-    {
-        cerr << "error: missing '[' " << endl;
-        return false;
-    }
+    return status;
 }
 
 bool isBraceBalance(string &filename)
@@ -86,16 +53,15 @@ bool isBraceBalance(string &filename)
         return false;
     }
     char word;
-    list<char> braces = {'(', ')', '{', '}', '[', ']'};
     vector<char> bracesInFile;
     while (file.get(word))
     {
-        if (isInList(word, braces))
+        if (isInList(word))
         {
             bracesInFile.emplace_back(word);
         }
     }
-    if (isRectangularsBalanced(bracesInFile) && isParanthesisBalanced(bracesInFile) && isCurlysBalanced(bracesInFile))
+    if (isBalanced(bracesInFile))
         return true;
     return false;
 }
