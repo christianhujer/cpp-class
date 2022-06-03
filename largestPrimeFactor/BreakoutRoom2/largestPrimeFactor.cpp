@@ -29,4 +29,3 @@ int main() {
     cout << "Largest prime factor of " << inputNumber <<" is: " << largestPrimeFactor(inputNumber) << endl;
     return EXIT_SUCCESS;
 }
-
