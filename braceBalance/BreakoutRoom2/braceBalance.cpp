@@ -1,16 +1,17 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <stack>
+#include <queue>
+#include <map>
 #include <list>
-#include <vector>
+#include <iterator>
 
 using namespace std;
 
-vector<char> braces = {'(', ')', '{', '}', '[', ']'};
-
-bool isInList(char word)
+bool isInList(char word, list<char> braces)
 {
-    vector<char>::iterator it;
+    list<char>::iterator it;
     for (it = braces.begin(); it != braces.end(); it++)
     {
         if (word == *it)
@@ -19,51 +20,64 @@ bool isInList(char word)
     return false;
 }
 
-bool isBalanced(vector<char> &bracesInFile)
+bool isOpening(char word)
 {
-    bool status = true;   
-    for (int i = 0; i < 5; i += 2)
+    list<char> braces = {'(', '[', '{'};
+    if (isInList(word, braces))
+        return true;
+    return false;
+}
+
+bool isClosing(char word)
+{
+    list<char> braces = {')', ']', '}'};
+    if (isInList(word, braces))
+        return true;
+    return false;
+}
+
+bool isMatching(char open, char close)
+{
+    map<char, char> braces = {{'(', ')'},
+                              {'[', ']'},
+                              {'{', '}'}};
+    if (braces[open] == close)
+        return true;
+    else
     {
-        int count1 = count(bracesInFile.begin(), bracesInFile.end(), braces[i]);
-        int count2 = count(bracesInFile.begin(), bracesInFile.end(), braces[i+1]);
-        if (count1 == count2)
-        {
-            status;
-        }
-        else if (count1 > count2)
-        {
-            cerr << "error: missing '" << braces[i+1] << "'" << endl;
-            status = false;
-        }
-        else
-        {
-            cerr << "error: missing '" << braces[i] << "'" << endl;
-            status = false;
-        }
+        cout << braces[open] << " is missing" <<endl;
+        return false;
     }
-    return status;
 }
 
 bool isBraceBalance(string &filename)
 {
     ifstream file(filename);
+    bool status = true;
     if (!file.is_open())
     {
         cout << filename << " does not exists" << endl;
-        return false;
+        status = false;
     }
     char word;
-    vector<char> bracesInFile;
+    stack<char> openingBraces;
+    queue<char> closingBraces;
     while (file.get(word))
     {
-        if (isInList(word))
-        {
-            bracesInFile.emplace_back(word);
-        }
+        if (isOpening(word))
+            openingBraces.push(word);
+        if (isClosing(word))
+            closingBraces.push(word);
     }
-    if (isBalanced(bracesInFile))
-        return true;
-    return false;
+    while(!openingBraces.empty())
+    {
+        if (isMatching(openingBraces.top(), closingBraces.front()))
+            closingBraces.pop();
+        else
+            status = false;
+        openingBraces.pop();
+    }
+    return status;
 }
 
 int main(int argc, char *argv[])
