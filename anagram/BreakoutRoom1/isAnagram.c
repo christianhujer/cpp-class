@@ -22,34 +22,45 @@ char *sortWord(char *word)
     return word;
 }
 
-int main(int argc, char *argv[])
+bool isAnagram(char* firstname, char* secondname)
 {
-    bool endresult = EXIT_SUCCESS;
 
-    char *firstWord = (char *)malloc(sizeof(char));
-    char *secondWord = (char *)malloc(sizeof(char));
-    strcpy(firstWord, argv[1]);
-    strcpy(secondWord, argv[2]);
-
-    if (strlen(firstWord) != strlen(secondWord))
+    if (strlen(firstname) != strlen(secondname))
     {
-        printf("%s is not an anagram of %s", argv[1], argv[2]);
-        endresult = EXIT_FAILURE;
+         return 0;
     }
     else
     {
-        if (strcmp(sortWord(firstWord), sortWord(secondWord)) == 0)
-            printf("%s is an anagram of %s", argv[1], argv[2]);
-
+        if (strcmp(sortWord(firstname), sortWord(secondname)) == 0)
+        {
+            return 1;
+        }
         else
         {
-            printf("%s is not an anagram of %s", argv[1], argv[2]);
-            endresult = EXIT_FAILURE;
+           return 0;
         }
     }
 
-    free(firstWord);
-    free(secondWord);
+}
+
+int main(int argc, char *argv[])
+{
+    bool endresult = EXIT_SUCCESS;
+     char *FirstOriginal = (char *)malloc(sizeof(char));
+    char *SecondOriginal = (char *)malloc(sizeof(char));
+    strcpy(FirstOriginal, argv[1]);
+    strcpy(SecondOriginal, argv[2]);
+
+    if(isAnagram(argv[1], argv[2]))
+    {
+        printf("%s is an anagram of %s", FirstOriginal, SecondOriginal);
+    }
+    else{
+        printf("%s is not an anagram of %s", FirstOriginal, SecondOriginal);
+        endresult = EXIT_FAILURE;
+    }
+    free(FirstOriginal);
+    free(SecondOriginal);
 
     return endresult;
 }
