@@ -13,7 +13,8 @@ string lowercase(string convertString)
     for (int i = 0; i < ln; i++)
     {
         if (convertString[i] >= 'A' && convertString[i] <= 'Z')
-            convertString[i] = convertString[i] + 32;
+            //convertString[i] = convertString[i] + 32;
+            convertString[i] = tolower(convertString[i]);
     }
     return convertString;
 }
@@ -29,13 +30,11 @@ void word_count(string &filename, bool *exit_status)
     }
 
     char word;
-    vector<string> wordsvector;
     map<string, int> Counters;
     string s;
 
     while (file.get(word) >> s)
     {
-
         for (int i = 0, len = s.size(); i < len; i++)
         {
             if (ispunct(s[i]))
@@ -52,7 +51,6 @@ void word_count(string &filename, bool *exit_status)
     {
         cout << it->first << "\t" << it->second << endl;
     }
-    // if (exit_status) return true;
 }
 
 int main(int argc, char *argv[])
