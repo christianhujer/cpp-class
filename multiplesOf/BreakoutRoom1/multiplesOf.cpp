@@ -2,8 +2,7 @@
 
 using namespace std;
 
-int main(void)
-{
+int multipleOf(){
     int num = 0, i = 0;
     while (i < 1000)
     {
@@ -13,6 +12,13 @@ int main(void)
         }
         i++;
     }
-    cout << num << endl;
+    return num;
+}
+
+int main(void)
+{
+    int result;
+    result =multipleOf();
+    cout << result << endl;
     return EXIT_SUCCESS;
 }
