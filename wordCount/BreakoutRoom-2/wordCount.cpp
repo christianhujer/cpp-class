@@ -6,6 +6,14 @@
 
 using namespace std;
 
+void printData(vector<string> &fileData)
+{
+     for (int i = 0; i < fileData.size(); i++)
+    {
+        cout << fileData[i] << endl;
+    }
+}
+
 void getContent(string &filename)
 {
     ifstream file(filename);
@@ -19,7 +27,6 @@ void getContent(string &filename)
     {
         fileData.emplace_back(word);
     }
-
     for (auto i = fileData.begin(); i != fileData.end(); i++)
     {
         for (auto j = i->begin(); j != i->end(); j++)
@@ -27,12 +34,7 @@ void getContent(string &filename)
             *j = tolower(*j);
         }
     }
-
-    for (int i = 0; i < fileData.size(); i++)
-    {
-        cout << fileData[i] << endl;
-    }
-}
+} 
 
 int main(int argc, char* argv[])
 {
