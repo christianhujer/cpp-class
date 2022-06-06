@@ -3,10 +3,11 @@
 #include <fstream>
 #include <vector>
 #include <map>
+#include <iterator>
 
 using namespace std;
 
-void lowercase(string convertString)
+string lowercase(string convertString)
 {
     int ln = convertString.length();
     for (int i = 0; i < ln; i++)
@@ -14,6 +15,7 @@ void lowercase(string convertString)
         if (convertString[i] >= 'A' && convertString[i] <= 'Z')
             convertString[i] = convertString[i] + 32;
     }
+    return convertString;
 }
 
 void word_count(string &filename, bool *exit_status)
@@ -33,7 +35,16 @@ void word_count(string &filename, bool *exit_status)
 
     while (file.get(word) >> s)
     {
-        lowercase(s);
+
+        for (int i = 0, len = s.size(); i < len; i++)
+        {
+            if (ispunct(s[i]))
+            {
+                s.erase(i--, 1);
+                len = s.size();
+            }
+        }
+        s = lowercase(s);
         ++Counters[s];
     }
 
@@ -41,19 +52,19 @@ void word_count(string &filename, bool *exit_status)
     {
         cout << it->first << "\t" << it->second << endl;
     }
-   // if (exit_status) return true;
-    
+    // if (exit_status) return true;
 }
 
 int main(int argc, char *argv[])
 {
-    bool exit_status= true;
+    bool exit_status = true;
     for (int i = 1; i < argc; i++)
     {
         string filename = argv[i];
-       word_count(filename, &exit_status);
+        word_count(filename, &exit_status);
     }
-if (exit_status) return EXIT_SUCCESS;
-else return EXIT_FAILURE;
-
+    if (exit_status)
+        return EXIT_SUCCESS;
+    else
+        return EXIT_FAILURE;
 }
