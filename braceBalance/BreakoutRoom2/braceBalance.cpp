@@ -1,11 +1,11 @@
 #include <algorithm>
+#include <cassert>
 #include <fstream>
 #include <iostream>
-#include <stack>
-#include <queue>
-#include <map>
-#include <list>
 #include <iterator>
+#include <list>
+#include <map>
+#include <stack>
 
 using namespace std;
 
@@ -41,11 +41,12 @@ bool isMatching(char open, char close)
     map<char, char> braces = {{'(', ')'},
                               {'[', ']'},
                               {'{', '}'}};
+    //cout << "|" << open << "," << close << "|" << endl;
     if (braces[open] == close)
         return true;
     else
     {
-        cout << braces[open] << " is missing" <<endl;
+        cout << braces[open] << " is expected." << endl;
         return false;
     }
 }
@@ -56,30 +57,37 @@ bool isBraceBalance(string &filename)
     bool status = true;
     if (!file.is_open())
     {
-        cout << filename << " does not exists" << endl;
+        cout << filename << " does not exists." << endl;
         status = false;
     }
     char word;
     stack<char> openingBraces;
-    queue<char> closingBraces;
     while (file.get(word))
     {
         if (isOpening(word))
             openingBraces.push(word);
         if (isClosing(word))
-            closingBraces.push(word);
+        {
+            if (!openingBraces.empty())
+            {
+                if (!isMatching(openingBraces.top(), word))
+                    status = false;
+            }
+            else
+            {
+                cout << word << " is unexpected." << endl;
+                status = false;
+            }
+            openingBraces.pop();
+        }
     }
-    while(!openingBraces.empty())
-    {
-        if (isMatching(openingBraces.top(), closingBraces.front()))
-            closingBraces.pop();
-        else
-            status = false;
+    while(!openingBraces.empty()){
+        if (!isMatching(openingBraces.top(), '<'))
+                    status = false;
         openingBraces.pop();
     }
     return status;
 }
-
 int main(int argc, char *argv[])
 {
     bool status = EXIT_SUCCESS;
